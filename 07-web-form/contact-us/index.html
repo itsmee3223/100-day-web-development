@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Contact Us Form</title>
+  </head>
+  <body>
+    <header><h1>Contact Us</h1></header>
+   <main>
+     <form action="../contact-us/" method="GET">
+        <section>
+          <h2>How can we help you?</h2>
+          <ul>
+            <li>
+              <label for="name">Your Name</label>
+              <input type="text" name="name" id="name" required>
+            </li>
+            <li>
+              <label for="email">Your E-Mail Address</label>
+              <input type="email" name="email" id="email" required>
+            </li>
+            <li>
+              <label for="telpon">Your Phone Number</label>
+              <input type="tel" name="telpon" id="telpon" minlength="5">
+            </li>
+            <li>
+              <label for="message">Your Message</label>
+              <textarea name="message" id="message" cols="30" rows="10"></textarea>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>How did you find us?</h2>
+          <select name="find" id="find">
+            <option value="search">Web Search</option>
+            <option value="word">Word of Mout</option>
+            <option value="other">Other</option>
+          </select>
+        </section>
+        <section>
+          <h2>How should we reply?</h2>
+          <ul>
+            <li class="inline-control">
+              <input type="radio" name="reply" id="reply-phone" value="phone" required>
+              <label for="reply-phone">Call me</label>
+            </li>
+            <li class="inline-control">
+              <input type="radio" name="reply" id="email" value="email" required>
+              <label for="email">Send me an email</label>
+            </li>
+            <li class="inline-control">
+              <input type="radio" name="reply" id="don't-reply" value="don't-reply" required>
+              <label for="don't-reply">Don't reply</label>
+            </li>
+          </ul>
+        </section>
+        <section class="inline-control">
+          <input type="checkbox" name="accept" id="accept" required>
+          <label for="accept">Accept Terms</label>
+        </section>
+        <sectoin id="form-actions">
+          <button type="reset" class="btn-clear">Clear</button>
+          <button type="submit" class="btn-submit">Submit</button>
+        </sectoin>
+     </form>
+   </main>
+  </body>
+</html>
