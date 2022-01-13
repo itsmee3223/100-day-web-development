@@ -1,13 +1,12 @@
 {
-  "name": "web-development-complete-guide",
+  "name": "express-static-dynamic-web",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js"
   },
   "keywords": [],
-  "author": "Maximilian Schwarzmüller (Academind GmbH)",
+  "author": "Ramanda Ajisaka Asyraf",
   "license": "MIT",
   "dependencies": {
     "ejs": "^3.1.6",
@@ -15,5 +14,6 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+  "description": ""
 }
