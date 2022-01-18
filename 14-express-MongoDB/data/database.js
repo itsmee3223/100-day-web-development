@@ -1,22 +1,22 @@
 const mongodb = require('mongodb');
 
-const MongoClient = mongodb.MongoClient
+const MongoClient = mongodb.MongoClient;
 
-let database
+let database;
 
-async function connect(){
-  const client = await MongoClient.connect('mongodb://localhost:27017')
-  database = client.db('blog')
+async function connect() {
+  const client = await MongoClient.connect('mongodb://localhost:27017');
+  database = client.db('blog');
 }
 
-function getDb(){
-  if(!database){
-    throw {message: 'Database connection not established!'}
+function getDb() {
+  if (!database) {
+    throw { message: 'Database connection not established!' };
   }
-  return database
+  return database;
 }
 
 module.exports = {
-  connectDatabase: connect,
+  connectToDatabase: connect,
   getDb: getDb
-}
+};

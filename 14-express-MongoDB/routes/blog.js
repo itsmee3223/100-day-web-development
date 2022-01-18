@@ -1,36 +1,37 @@
-const express = require("express");
-const mongodb = require("mongodb");
+const express = require('express');
+const mongodb = require('mongodb');
 
-const db = require("../data/database");
+const db = require('../data/database');
+
 const ObjectId = mongodb.ObjectId;
 
 const router = express.Router();
 
-router.get("/", function (req, res) {
-  res.redirect("/posts");
+router.get('/', function (req, res) {
+  res.redirect('/posts');
 });
 
-router.get("/posts", function (req, res) {
+router.get('/posts', async function (req, res) {
   const posts = await db
     .getDb()
-    .collection("post")
+    .collection('posts')
     .find({})
-    .project({ title: 1, summary: 1, "author.name": 1 })
+    .project({ title: 1, summary: 1, 'author.name': 1 })
     .toArray();
-
-  res.render("posts-list", {
-    posts: posts,
-  });
+  res.render('posts-list', { posts: posts });
 });
 
-router.get("/new-post", async function (req, res) {
-  const authors = await db.getDb().collection.find().toArray();
-  res.render("create-post", { authors: authors });
+router.get('/new-post', async function (req, res) {
+  const authors = await db.getDb().collection('authors').find().toArray();
+  res.render('create-post', { authors: authors });
 });
 
-router.post("/posts", async function (req, res) {
+router.post('/posts', async function (req, res) {
   const authorId = new ObjectId(req.body.author);
-  const author = await db.getDb().collection().findOne({ _id: authorId });
+  const author = await db
+    .getDb()
+    .collection('authors')
+    .findOne({ _id: authorId });
 
   const newPost = {
     title: req.body.title,
@@ -43,56 +44,61 @@ router.post("/posts", async function (req, res) {
       email: author.email,
     },
   };
-  await db.getDb().collection("posts").insertOne(newPost);
-  res.redirect("/posts");
+
+  const result = await db.getDb().collection('posts').insertOne(newPost);
+  console.log(result);
+  res.redirect('/posts');
 });
 
-router.get("/posts/:id", async function (req, res) {
+router.get('/posts/:id', async function (req, res, next) {
   let postId = req.params.id;
 
   try {
     postId = new ObjectId(postId);
-  } catch (err) {
-    return res.status(404).render("404");
+  } catch (error) {
+    return res.status(404).render('404');
+    // return next(error);
   }
 
   const post = await db
     .getDb()
-    .collection("posts")
+    .collection('posts')
     .findOne({ _id: postId }, { summary: 0 });
 
   if (!post) {
-    return res.status(404).render("404");
+    return res.status(404).render('404');
   }
 
-  post.humanReadableDate = post.date.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  post.humanReadableDate = post.date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
+  post.date = post.date.toISOString();
 
-  post.date = post.data.toISOString();
-  res.render("post-detail", { post: post });
+  res.render('post-detail', { post: post });
 });
 
-router.get("/posts/:id/edit", async function (req, res) {
+router.get('/posts/:id/edit', async function (req, res) {
   const postId = req.params.id;
   const post = await db
     .getDb()
-    .collection("posts")
+    .collection('posts')
     .findOne({ _id: new ObjectId(postId) }, { title: 1, summary: 1, body: 1 });
 
   if (!post) {
-    res.status(404).render("404");
+    return res.status(404).render('404');
   }
+
+  res.render('update-post', { post: post });
 });
 
-router.post("/posts/:id/edit", async function (req, res) {
-  const postId = req.params.id;
-  const post = await db
+router.post('/posts/:id/edit', async function (req, res) {
+  const postId = new ObjectId(req.params.id);
+  const result = await db
     .getDb()
-    .collection("posts")
+    .collection('posts')
     .updateOne(
       { _id: postId },
       {
@@ -100,18 +106,21 @@ router.post("/posts/:id/edit", async function (req, res) {
           title: req.body.title,
           summary: req.body.summary,
           body: req.body.content,
-          date: new Date(),
+          // date: new Date()
         },
       }
     );
-  res.redirect("/posts");
+
+  res.redirect('/posts');
 });
 
-router.post("/posts/:id/delete", async function (req, res) {
-  const postId = req.params.id;
-  const post = await db.getDb().collection("posts").deleteOne({ _id: postId });
-
-  res.redirect("/posts");
+router.post('/posts/:id/delete', async function (req, res) {
+  const postId = new ObjectId(req.params.id);
+  const result = await db
+    .getDb()
+    .collection('posts')
+    .deleteOne({ _id: postId });
+  res.redirect('/posts');
 });
 
 module.exports = router;
