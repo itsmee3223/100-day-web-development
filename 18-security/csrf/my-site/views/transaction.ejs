@@ -1,11 +1,13 @@
 <%- include('includes/head.ejs', { title: 'Transaction' }) %>
 <link rel="stylesheet" href="/styles/forms.css">
 </head>
+
 <body>
   <%- include('includes/header.ejs') %>
   <main>
     <h1>Send Money</h1>
     <form action="/transaction" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       <div class="form-control">
         <label for="recipient">Recipient Email</label>
         <input type="email" id="recipient" name="recipient">
@@ -18,4 +20,5 @@
     </form>
   </main>
 </body>
+
 </html>
