@@ -4,8 +4,8 @@ const pool = mysql.createPool({
   host: 'localhost',
   database: 'security',
   user: 'root',
-  password: 'your-pw',
-  multipleStatements: true
+  password: '',
+  multipleStatements: false // default set as false it should be false for just executring one query only
 })
 
 module.exports = pool;
