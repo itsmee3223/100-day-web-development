@@ -25,4 +25,5 @@ function getLogin(req, res) {
 module.exports = {
   getSignUp: getSignUp,
   getLogin: getLogin,
+  signup: signup,
 };
