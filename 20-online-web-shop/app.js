@@ -1,16 +1,29 @@
+// node modules
+const csrf = require("csurf");
 const express = require("express");
 const path = require("path");
 const database = require("./data/database");
 
+// middlewares
+const addCsrfToken = require('./middlewares/csrf-token');
+
+// routes
 const authRoutes = require("./routes/auth.routes");
 
+// express use module
 const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: false }));
+app.use(csrf())
 
+// middleware
+app.use(addCsrfToken)
+
+// routes
 app.use(authRoutes);
 
 database
