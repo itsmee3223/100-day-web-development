@@ -11,12 +11,12 @@ function getSessionErrorData(req, defaultValues) {
   req.session.inputData = null;
 }
 
-function flashErrorsToSession(req, data, acton) {
+function flashErrorsToSession(req, data, action) {
   req.session.sessionInputData = {
     hasError: true,
     ...data,
   };
-  req.session.save(acton);
+  req.session.save(action);
 }
 
 module.exports = {
