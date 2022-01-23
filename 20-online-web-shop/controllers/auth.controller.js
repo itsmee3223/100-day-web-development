@@ -1,5 +1,9 @@
 function getSignUp(req, res){
+  res.render('customer/auth/signup')
+}
 
+function signup(req, res){
+  
 }
 
 function getLogin(req, res){

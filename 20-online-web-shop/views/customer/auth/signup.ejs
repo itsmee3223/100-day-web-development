@@ -1,12 +1,45 @@
-<% include('../includes/head'), {pageTitle: 'Signup'} %>
+<%- include('../includes/head', {pageTitle: 'Signup'}) %>
+<link rel="stylesheet" href="/styles/form.css">
+<link rel="stylesheet" href="/styles/auth.css">
 </head>
 <body>
-  <% include('../includes/header'), {pageTitle: 'Signup'} %>
+  <%- include('../includes/header') %>
   <main>
     <h1>Create New Account</h1>
-    <form action="" method="POST">
-      
+    <form action="/signup" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <div class="input-form">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+      </div>
+      <div class="input-form">
+        <label for="confirm-email">Confirm Email</label>
+        <input type="email" name="confirm-email" id="confirm-email" required>
+      </div>
+      <div class="input-form">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required minlength="6">
+      </div>
+      <hr>
+      <div class="input-form">
+        <label for="full-name">Full Name</label>
+        <input type="text" name="full-name" id="full-name" required>
+      </div>
+      <div class="input-form">
+        <label for="street">Street</label>
+        <input type="text" name="street" id="street" required>
+      </div>
+      <div class="input-form">
+        <label for="postal">Postal Code</label>
+        <input type="text" name="postal" id="postal" required minlength="4">
+      </div>
+      <div class="input-form">
+        <label for="city">City</label>
+        <input type="text" name="city" id="city" required >
+      </div>
+      <button class="btn">Create Account</button>
+      <p id="swithc-form"><a href="/login">Login Instead</a></p>
     </form>
   </main>
   
-  <% include('../includes/footer'), {pageTitle: 'Signup'} %>
+  <%- include('../includes/footer') %>
