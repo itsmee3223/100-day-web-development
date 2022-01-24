@@ -1,35 +1,51 @@
-// node modules
-const csrf = require("csurf");
-const express = require("express");
+// built in modules
 const path = require("path");
-const database = require("./data/database");
+
+// node modules
+const express = require("express");
+const csrf = require("csurf");
 const expressSession = require("express-session");
 
 // middlewares
-const addCsrfToken = require("./middlewares/csrf-token");
+const createSessionConfig = require("./config/session");
+
+const database = require("./data/database"); // database connect
+const addCsrfTokenMiddleware = require("./middlewares/csrf-token");
+const errorHandlerMiddleware = require("./middlewares/error-handler");
+const checkAuthStatusMiddleware = require("./middlewares/check-auth");
 
 // routes
 const authRoutes = require("./routes/auth.routes");
-const createSessionConfig = require("./config/session");
+const productsRoutes = require("./routes/products.routes");
+const baseRoutes = require("./routes/base.routes");
 
 // express use module
 const app = express();
 
-app.set("view engine", "ejs");
+app.set("view engine", "ejs"); // set view engin
 app.set("views", path.join(__dirname, "views"));
 
+// set static file to expose for client
 app.use(express.static("public"));
+// html body parser
 app.use(express.urlencoded({ extended: false }));
 // config session
-app.use(expressSession(createSessionConfig()));
+const sessionConfig = createSessionConfig();
+app.use(expressSession(sessionConfig));
 // csrf token for defending csrf attack
 app.use(csrf());
 
-// middleware
-app.use(addCsrfToken);
+// middlewares use
+app.use(addCsrfTokenMiddleware);
+app.use(checkAuthStatusMiddleware);
 
 // routes handler
+app.use(baseRoutes);
 app.use(authRoutes);
+app.use(productsRoutes);
+
+// error handler
+app.use(errorHandlerMiddleware);
 
 database
   .connectToDatabase()
