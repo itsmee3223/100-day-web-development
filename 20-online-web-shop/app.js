@@ -28,6 +28,7 @@ app.set("views", path.join(__dirname, "views"));
 
 // set static file to expose for client
 app.use(express.static("public"));
+app.use("/products/assets", express.static("product-data"));
 // html body parser
 app.use(express.urlencoded({ extended: false }));
 // config session
