@@ -2,44 +2,51 @@
 <link rel="stylesheet" href="/styles/form.css">
 <link rel="stylesheet" href="/styles/auth.css">
 </head>
+
 <body>
   <%- include('../../shared/includes/header') %>
   <main>
     <h1>Create New Account</h1>
+    <% if (inputData.errorMessage) { %>
+    <section class="alert">
+      <h2>Invalid Input</h2>
+      <p><%= inputData.errorMessage %></p>
+    </section>
+    <% } %>
     <form action="/signup" method="POST">
       <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
       <div class="input-form">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" required>
+        <input type="email" name="email" id="email" value="<%= inputData.email %>" required>
       </div>
       <div class="input-form">
         <label for="confirm-email">Confirm Email</label>
-        <input type="email" name="confirm-email" id="confirm-email" required>
+        <input type="email" name="confirm-email" id="confirm-email" value="<%= inputData.confirmEmail %>" required>
       </div>
       <div class="input-form">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" required minlength="6">
+        <input type="password" name="password" id="password" value="<%= inputData.password %>" required minlength="6">
       </div>
       <hr>
       <div class="input-form">
-        <label for="full-name">Full Name</label>
-        <input type="text" name="full-name" id="full-name" required>
+        <label for="fullname">Full Name</label>
+        <input type="text" name="fullname" id="fullname" value="<%= inputData.fullname %>" required>
       </div>
       <div class="input-form">
         <label for="street">Street</label>
-        <input type="text" name="street" id="street" required>
+        <input type="text" name="street" id="street" value="<%= inputData.street %>" required>
       </div>
       <div class="input-form">
         <label for="postal">Postal Code</label>
-        <input type="text" name="postal" id="postal" required minlength="4">
+        <input type="text" name="postal" id="postal" value="<%= inputData.postal %>" required minlength="4">
       </div>
       <div class="input-form">
         <label for="city">City</label>
-        <input type="text" name="city" id="city" required >
+        <input type="text" name="city" id="city" value="<%= inputData.city %>" required>
       </div>
       <button class="btn">Create Account</button>
       <p id="swithc-form"><a href="/login">Login Instead</a></p>
     </form>
   </main>
-  
+
   <%- include('../../shared/includes/footer') %>
