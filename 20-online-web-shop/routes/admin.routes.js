@@ -18,5 +18,6 @@ router.post(
   imageUploadMiddleware,
   adminController.updateProduct
 );
+router.delete('/products/:id', adminController.deleteProduct)
 
 module.exports = router;

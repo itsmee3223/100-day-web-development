@@ -4,9 +4,12 @@
     <input type="text" id="title" name="title" required value="<%= product.title %>">
   </div>
 
-  <div class="input-form">
-    <label for="image">Image</label>
-    <input type="file" id="image" name="image" accept="image/png,image/jpg" <% if (imageRequired) { %> required <% } %>>
+  <div id="image-upload-control">
+    <div class="input-form">
+      <label for="image">Image</label>
+      <input type="file" id="image" name="image" accept="image/png,image/jpg" <% if (imageRequired) { %> required <% } %>>
+    </div>
+    <img src="" alt="selected image.">
   </div>
 
   <div class="input-form">
