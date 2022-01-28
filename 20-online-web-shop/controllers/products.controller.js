@@ -12,7 +12,7 @@ async function getAllProducts(req, res, next) {
 async function getProductDetail(req, res, next) {
   try {
     const product = await Product.findById(req.params.id);
-    res.render("customer/products/product-data", {
+    res.render("customer/products/product-details", {
       product: product,
     });
   } catch (error) {
