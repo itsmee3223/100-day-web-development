@@ -9,6 +9,18 @@ async function getAllProducts(req, res, next) {
   }
 }
 
+async function getProductDetail(req, res, next) {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.render("customer/products/product-data", {
+      product: product,
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   getAllProducts: getAllProducts,
+  getProductDetail: getProductDetail,
 };
