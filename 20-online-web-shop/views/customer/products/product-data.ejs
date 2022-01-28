@@ -4,14 +4,14 @@
 
 <body>
   <%- include('../../shared/includes/header') %>
-  <main id="product-detail">
+  <main id="product-details">
     <h1>All Products</h1>
     <header>
       <img src="<%= product.imageUrl %>" alt="Detail product">
       <div id="product-info">
         <h1><%= product.title %></h1>
         <p>Rp. <%= product.price %></p>
-        <button></button>
+        <button class="btn">Add to cart</button>
       </div>
     </header>
     <p id="product-description"><%= product.description %></p>

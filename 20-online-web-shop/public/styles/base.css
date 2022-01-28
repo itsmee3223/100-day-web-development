@@ -3,7 +3,8 @@
 }
 
 html {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", "sans-serif";
+
   --color-gray-50: rgb(243, 236, 230);
   --color-gray-100: rgb(207, 201, 195);
   --color-gray-300: rgb(99, 92, 86);
@@ -47,10 +48,10 @@ body {
 main {
   width: 90%;
   max-width: 50rem;
-  margin: auto;
+  margin: 0 auto;
 }
 
-ul,
+ul, 
 ol {
   list-style: none;
   margin: 0;
@@ -72,24 +73,20 @@ a {
   border-radius: var(--border-radius-small);
 }
 
-.btn-alt {
-  background-color: transparent;
-  color: var(--color-primary-500-bg);
-}
-
-.btn-alt:hover,
-.btn-alt:active {
-  background-color: var(--color-primary-500-bg);
-}
-
 .btn:hover,
 .btn:active {
   background-color: var(--color-primary-700);
   border-color: var(--color-primary-700);
 }
 
-.input-form {
-  margin: var(--space-4);
+.btn-alt {
+  background-color: transparent;
+  color: var(--color-primary-500);
+}
+
+.btn-alt:hover,
+.btn-alt:active {
+  background-color: var(--color-primary-500-bg);
 }
 
 .alert {
@@ -107,4 +104,12 @@ a {
 
 .alert p {
   margin: var(--space-2) 0;
+}
+
+.badge {
+  margin-left: var(--space-2);
+  padding: 0.15rem var(--space-4);
+  border-radius: 10rem;
+  background-color: var(--color-primary-500);
+  color: var(--color-primary-500-contrast);
 }
