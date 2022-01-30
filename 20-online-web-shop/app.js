@@ -34,7 +34,7 @@ app.use(express.static("public"));
 app.use("/products/assets", express.static("product-data"));
 // html body parser
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json())
+app.use(express.json());
 // config session
 const sessionConfig = createSessionConfig();
 app.use(expressSession(sessionConfig));
