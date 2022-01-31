@@ -1,14 +1,17 @@
+const stripe = require("stripe")(
+  "sk_test_51KO0AzEw5ExEZOQdkroXhhZ4cooOFM5mKVu07wBcrmPE6o51iAsxkUOD1MgYOQRoU4J4sgXVegxGiNbuiUI5Bapt00dlRNtT0x"
+);
 const Order = require("../models/order.model");
 const User = require("../models/user.model");
 
 async function getOrders(req, res) {
   try {
-    const orders = await Order.findAllForUser(res.locals.uid)
+    const orders = await Order.findAllForUser(res.locals.uid);
     res.render("customer/orders/all-orders", {
-      orders: orders
+      orders: orders,
     });
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
 
@@ -33,10 +36,38 @@ async function addOrder(req, res, next) {
 
   req.session.cart = null;
 
-  res.redirect("/orders");
+  const session = await stripe.checkout.sessions.create({
+    line_items: cart.items.map(function(item){
+      return{
+        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+        price_data: {
+          currency: "idr",
+          product_data: {
+            name: item.product.title,
+          },
+          unit_amount: +item.product.price.toFixed(2) * 100,
+        },
+        quantity: item.quantity,
+      }
+    }),
+    mode: "payment",
+    success_url: `http://localhost:3000/orders/success`,
+    cancel_url: `http://localhost:3000/orders/failure`,
+  });
+
+  res.redirect(303, session.url);
+}
+
+function getSuccess(req, res) {
+  res.render("customer/orders/success");
+}
+function getFailure(req, res) {
+  res.render("customer/orders/failure");
 }
 
 module.exports = {
   addOrder: addOrder,
   getOrders: getOrders,
+  getSuccess: getSuccess,
+  getFailure: getFailure,
 };
