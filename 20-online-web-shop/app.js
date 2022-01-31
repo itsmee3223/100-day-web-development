@@ -15,6 +15,8 @@ const errorHandlerMiddleware = require("./middlewares/error-handler");
 const cartMiddleware = require("./middlewares/cart");
 const checkAuthStatusMiddleware = require("./middlewares/check-auth");
 const protectAuthMiddleware = require("./middlewares/protect-routes");
+const updateCartPricesMiddleware = require("./middlewares/update-cart-prices");
+const notFoundMiddleware = require("./middlewares/not-found");
 
 // routes
 const authRoutes = require("./routes/auth.routes");
@@ -46,15 +48,17 @@ app.use(csrf());
 app.use(addCsrfTokenMiddleware);
 app.use(checkAuthStatusMiddleware);
 app.use(cartMiddleware);
+app.use(updateCartPricesMiddleware);
 
 // routes handler
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
 app.use("/cart", cartRoutes);
-app.use(protectAuthMiddleware); // protecting admin routes
-app.use('/orders' ,ordersRoutes); // protecting admin routes
-app.use("/admin", adminRoutes);
+app.use("/orders", protectAuthMiddleware, ordersRoutes); // protecting admin routes
+app.use("/admin", protectAuthMiddleware, adminRoutes);
+
+app.use(notFoundMiddleware);
 
 // error handler
 app.use(errorHandlerMiddleware);
