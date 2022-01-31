@@ -12,6 +12,7 @@ async function updateOrder(event) {
   const csrfToken = formData.get("_csrf");
 
   let response;
+
   try {
     response = await fetch(`/admin/orders/${orderId}`, {
       method: "PATCH",
@@ -24,11 +25,13 @@ async function updateOrder(event) {
       },
     });
   } catch (error) {
-    return alert("Something went wrong - could not update order status.");
+    alert("Something went wrong - could not update order status.");
+    return;
   }
 
   if (!response.ok) {
-    return alert("Something went wrong - could not update order status.");
+    alert("Something went wrong - could not update order status.");
+    return;
   }
 
   const responseData = await response.json();
@@ -37,6 +40,6 @@ async function updateOrder(event) {
     responseData.newStatus.toUpperCase();
 }
 
-for (const updateOrderFormElement of UpdateOrderFormElements) {
+for (const updateOrderFormElement of updateOrderFormElements) {
   updateOrderFormElement.addEventListener("submit", updateOrder);
 }
