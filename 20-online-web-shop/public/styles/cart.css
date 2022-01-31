@@ -15,7 +15,7 @@
 .cart-item input {
   font: inherit;
   padding: var(--space-2);
-  width: 3rem;
+  width: 3.3rem;
   border-radius: var(--border-radius-small);
   border: none;
 }
@@ -48,4 +48,9 @@
     flex-direction: row;
     justify-content: space-between;
   }
+}
+
+#cart-total #cart-total-fallback {
+  font-size: 1rem;
+  font-weight: normal;
 }
