@@ -63,10 +63,15 @@ app.use(notFoundMiddleware);
 // error handler
 app.use(errorHandlerMiddleware);
 
+let PORT = 3000
+if(process.env.PORT){
+  PORT = process.env.PORT
+}
+
 database
   .connectToDatabase()
   .then(function () {
-    app.listen(3000);
+    app.listen(PORT);
   })
   .catch(function (error) {
     console.log("Failed to connect to the database!");
