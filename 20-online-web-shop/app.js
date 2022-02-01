@@ -9,7 +9,7 @@ const expressSession = require("express-session");
 // middlewares
 const createSessionConfig = require("./config/session");
 
-const database = require("./data/database"); // database connect
+const db = require("./data/database"); // database connect
 const addCsrfTokenMiddleware = require("./middlewares/csrf-token");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 const cartMiddleware = require("./middlewares/cart");
@@ -63,17 +63,15 @@ app.use(notFoundMiddleware);
 // error handler
 app.use(errorHandlerMiddleware);
 
-let PORT = 3000
-if(process.env.PORT){
-  PORT = process.env.PORT
+let PORT = 3000;
+if (process.env.PORT) {
+  PORT = process.env.PORT;
 }
 
-database
-  .connectToDatabase()
+db.initDatabase()
   .then(function () {
-    app.listen(PORT);
+    app.listen(port);
   })
   .catch(function (error) {
-    console.log("Failed to connect to the database!");
-    console.log(error);
+    console.log("Connecting to the database failed!");
   });
