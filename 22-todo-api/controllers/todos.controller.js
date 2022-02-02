@@ -15,9 +15,9 @@ async function getAllTodos(req, res, next) {
 
 async function addTodo(req, res, next) {
   const todoText = req.body.text;
+  const todo = new Todo(todoText);
 
   let insertedId;
-  const todo = new Todo(todoText);
   try {
     const result = await todo.save();
     insertedId = result.insertedId;
@@ -27,8 +27,8 @@ async function addTodo(req, res, next) {
 
   todo.id = insertedId.toString();
 
-  res.status().json({
-    message: "Added to do success",
+  res.json({
+    message: "Added todo success",
     createdTodo: todo,
   });
 }
