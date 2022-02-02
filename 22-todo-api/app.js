@@ -3,14 +3,11 @@ var express = require("express");
 const database = require("./data/database");
 
 var todosRoute = require("./routes/todos.routes");
-var usersRouter = require("./routes/users");
-
 var app = express();
 
 app.use(express.json());
 
 app.use("/todos", todosRoute);
-app.use("/users", usersRouter);
 
 
 app.use(function (error, req, res, next) {
