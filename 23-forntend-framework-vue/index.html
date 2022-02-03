@@ -25,9 +25,12 @@
       </form>
     </section>
     <section id="todos">
-      <ul id="todos-list">
+      <p v-if="todos.length === 0">There is no todo</p>
+      <ul v-else id="todos-list">
         <li v-for="todo in todos">
-          <p>{{ todo.text }}</p>
+          <p>
+            {{ todo.text }}
+          </p>
           <div>
             <button>Edit</button>
             <button>Delete</button>
