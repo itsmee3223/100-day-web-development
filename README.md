@@ -1,7 +1,7 @@
 # 100-day-web-development
 
-I buyed a course from Acdemind and learn how to become web dev in 100 day
+I bought a course from Acdemind and learn how to become web dev in 100 day
 - https://www.udemy.com/course/100-days-of-code-web-development-bootcamp/
-- I finish it on 27 day and learn so much about how to become website developer
+- Finish it on 27 day and learn so much about how to become website developer
 - Deployed APP on Heroku
 - https://ramanda-online-shop.herokuapp.com/products
