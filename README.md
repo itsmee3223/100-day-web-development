@@ -13,3 +13,8 @@ What i learn
 - Build frontend user interfaces with HTML, CSS & JavaScript
 - Build backend processes with NodeJS, Express & SQL + NoSQL databases
 - Add advanced features like user authentication, file upload or database queries to websites
+
+## 📸 Screenshot
+<img src='https://res.cloudinary.com/dniq91ewn/image/upload/v1689945234/100%20Day%20Web%20Dev/Screenshot_2023-07-21_104812_tsgk1j.png'  width='45%'> &nbsp; &nbsp; &nbsp; &nbsp; <img src='https://res.cloudinary.com/dniq91ewn/image/upload/v1689945233/100%20Day%20Web%20Dev/Screenshot_2023-07-21_200700_pnjnau.png'  width='45%'>
+
+<img src='https://res.cloudinary.com/dniq91ewn/image/upload/v1689945227/100%20Day%20Web%20Dev/Screenshot_2023-07-21_200959_ualaaj.png'  width='45%'> &nbsp; &nbsp; &nbsp; &nbsp; <img src='https://res.cloudinary.com/dniq91ewn/image/upload/v1689945231/100%20Day%20Web%20Dev/Screenshot_2023-07-21_201042_lelhel.png'  width='45%'>
